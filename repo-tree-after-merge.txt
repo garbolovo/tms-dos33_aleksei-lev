@@ -1,0 +1,11 @@
+*   c9b42eb Merge dev into master
+|\  
+| * f434e3e Add git repository tree
+| * 710bbd0 Add file in dev branch
+| * 01da8fd Add file in test branch
+|/  
+* b092e7d file with hash commit added on more time because somehow it disappeared
+* 732a741 Elephant typo fixed
+* 8c2e1a2 file-with-commit.txt added
+* 5baebae folder wild animas added
+* a37c4d4 first commit
