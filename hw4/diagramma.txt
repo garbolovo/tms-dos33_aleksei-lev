@@ -1,0 +1,17 @@
+                   Internet
+                      ^
+                      |
+               macOS (host)
+                      ^
+                      |
+          VirtualBox NAT engine
+           (DHCP + NAT + DNS)
+                      ^
+                      |
+             VM NAT interface
+                 10.0.2.x
+                      |
+          --------------------------------
+          |                              |
+    Internal Network                Internal Network
+      10.10.0.0/24                  (VM ↔ VM)
