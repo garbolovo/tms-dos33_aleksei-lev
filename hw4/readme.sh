@@ -9,3 +9,7 @@
 
 # Create service user (no sudo)
 ./50-users.sh devops --no-sudo
+
+### Есть ли пользователь и группа с нужными UID/GID
+getent group devops
+id devops
