@@ -13,3 +13,16 @@
 ### Есть ли пользователь и группа с нужными UID/GID
 getent group devops
 id devops
+
+### HOW TO RUN SCRIPTS
+cd ~
+# example git clone твоего репо hw4
+chmod +x bootstrap/*.sh
+
+./bootstrap/00-common.sh
+./bootstrap/10-net.sh <role>
+./bootstrap/30-ntp.sh <role>
+./bootstrap/40-users.sh
+./bootstrap/20-ssh.sh <role>
+
+###  <role> this is: jumphost | vm1 | vm2 | vm3.
