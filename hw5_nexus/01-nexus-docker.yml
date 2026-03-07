@@ -1,0 +1,70 @@
+- name: Run Nexus via Docker Compose (reliable)
+  hosts: nexus
+  become: true
+
+  vars:
+    nexus_dir: /opt/nexus
+    nexus_image: "sonatype/nexus3:3.89.0"
+    nexus_url: "http://127.0.0.1:8081/"
+
+  tasks:
+    - name: Create Nexus directory
+      file:
+        path: "{{ nexus_dir }}"
+        state: directory
+        mode: "0755"
+
+    - name: Upload docker-compose.yml
+      copy:
+        dest: "{{ nexus_dir }}/docker-compose.yml"
+        mode: "0644"
+        content: |
+          services:
+            nexus:
+              image: {{ nexus_image }}
+              container_name: nexus
+              restart: unless-stopped
+              ports:
+                - "8081:8081"
+              volumes:
+                - nexus-data:/nexus-data
+              environment:
+                - INSTALL4J_ADD_VM_PARAMS=-Xms1200m -Xmx1200m -XX:MaxDirectMemorySize=1200m
+          volumes:
+            nexus-data:
+
+    - name: Pull Nexus image (retry)
+      command: "docker pull {{ nexus_image }}"
+      register: pull_res
+      retries: 5
+      delay: 10
+      until: pull_res.rc == 0
+
+    - name: Start (or update) Nexus via compose (retry)
+      command: docker compose up -d
+      args:
+        chdir: "{{ nexus_dir }}"
+      register: compose_up
+      retries: 5
+      delay: 10
+      until: compose_up.rc == 0
+
+    - name: Wait for Nexus HTTP to respond on 8081
+      uri:
+        url: "{{ nexus_url }}"
+        method: GET
+        status_code: [200, 401, 403]
+      register: nexus_http
+      retries: 60
+      delay: 5
+      until: nexus_http.status in [200, 401, 403]
+
+    - name: Read initial admin password (if present)
+      command: docker exec -i nexus cat /nexus-data/admin.password
+      register: admin_pass
+      changed_when: false
+      failed_when: false
+
+    - name: Show initial admin password
+      debug:
+        msg: "Nexus is up. Initial admin password (if file exists): {{ admin_pass.stdout | default('N/A') }}"
