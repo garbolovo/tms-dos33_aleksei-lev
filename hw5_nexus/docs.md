@@ -9,10 +9,10 @@ nexus               running(1)          /opt/nexus/docker-compose.yml
 ```
 
 ## Доступ к Nexus
-``
+```
 ssh -L 8081:10.10.0.20:8081 jump (на хотсe)
 http://localhost:8081
 
 
-``
+```
 
