@@ -3,8 +3,8 @@
 
 Два плейбука
 
-00-docker.yml → ставит Docker/Compose на группу vms (все)
-01-nexus.yml → поднимает Nexus только на nexus
+- 00-docker.yml → ставит Docker/Compose на группу vms (все)
+- 01-nexus.yml → поднимает Nexus только на nexus
 
 ```
 ansible-playbook -i hosts.ini 01-nexus-docker.yml
