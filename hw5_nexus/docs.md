@@ -3,10 +3,8 @@
 
 ```
 ansible-playbook -i hosts.ini 01-nexus-docker.yml
-``
 
-
-
+```
 
 ```
 aleksei@vm20:~$ docker ps -a
