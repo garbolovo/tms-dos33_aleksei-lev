@@ -1,0 +1,17 @@
+[Unit]
+Description=JS DevOps App
+After=network.target
+
+[Service]
+Type=simple
+User=nodeuser
+WorkingDirectory=/opt/js-app
+ExecStart=/usr/bin/node /opt/js-app/app.js
+Restart=always
+RestartSec=5
+Nice=5
+StandardOutput=journal
+StandardError=journal
+
+[Install]
+WantedBy=multi-user.target
