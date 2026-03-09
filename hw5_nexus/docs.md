@@ -50,3 +50,16 @@ aleksei@vm10:~$
 
 ```
 
+## Сделано
+
+SSH и Ansible работают
+Docker + Compose v2 раскатаны через playbook
+Nexus поднят на vm20
+UI доступен
+создан pypi-proxy
+на vm10 настроен pip.conf
+python3 -m pip install --user httpx -v успешно скачал пакет через Nexus
+
+*Python/PyPI часть задания выполнена по сути.*
+
+
