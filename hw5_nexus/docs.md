@@ -1,3 +1,13 @@
+
+## How to install Nexus with Ansible Playbook
+
+```
+ansible-playbook -i hosts.ini 01-nexus-docker.yml
+``
+
+
+
+
 ```
 aleksei@vm20:~$ docker ps -a
 CONTAINER ID   IMAGE                    COMMAND                  CREATED       STATUS          PORTS                                         NAMES
@@ -47,6 +57,26 @@ Installing collected packages: typing_extensions, h11, httpcore, exceptiongroup,
   Consider adding this directory to PATH or, if you prefer to suppress this warning, use --no-warn-script-location.
 Successfully installed anyio-4.12.1 exceptiongroup-1.3.1 h11-0.16.0 httpcore-1.0.9 httpx-0.28.1 typing_extensions-4.15.0
 aleksei@vm10:~$
+
+```
+
+## Checking  Ansible ```nexus  group (Проверка, что Ansible видит группу nexus)
+
+
+```
+➜  hw5_nexus git:(master) ansible nexus -i hosts.ini -m ping
+vm20 | SUCCESS => {
+    "changed": false,
+    "ping": "pong"
+}
+➜  hw5_nexus git:(master)
+```
+
+```
+➜  hw5_nexus git:(master) ansible nexus -i hosts.ini -m command -a "docker ps"
+vm20 | CHANGED | rc=0 >>
+CONTAINER ID   IMAGE                    COMMAND                  CREATED       STATUS          PORTS                                         NAMES
+f142f5357993   sonatype/nexus3:3.89.0   "/opt/sonatype/nexus…"   2 weeks ago   Up 50 minutes   0.0.0.0:8081->8081/tcp, [::]:8081->8081/tcp   nexus
 
 ```
 
