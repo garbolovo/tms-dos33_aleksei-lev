@@ -23,6 +23,41 @@
 
  ## vm20 as NTP server for all other vms
 
+
+
+
+### На `vm20`
+
+Установили `chrony`:
+
+```bash
+sudo apt install chrony
+```
+
+В `chrony.conf`:
+
+```
+pool ntp.ubuntu.com iburst
+allow 10.10.0.0/24
+```
+
+Это сделало `vm20` **NTP сервером для внутренней сети**.
+
+---
+
+### На `jumphost`, `vm10`, `vm11`
+
+В `chrony.conf`:
+
+```
+server 10.10.0.20 iburst
+```
+
+То есть они берут время **у vm20**.
+
+
+
+
 ```textmate
 Internet NTP
       ↓
