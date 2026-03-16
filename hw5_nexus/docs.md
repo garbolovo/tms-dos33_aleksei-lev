@@ -29,6 +29,22 @@ http://localhost:8081
 
 ```
 
+
+### как настроить VM чтобы она обращалась в репозиторий Nexus
+
+```shell
+
+aleksei@vm10:~$ cat ~/.config/pip/pip.conf
+[global]
+index-url = http://10.10.0.20:8081/repository/pypi-proxy/simple
+trusted-host = 10.10.0.20
+aleksei@vm10:~$ pip3 config list
+global.index-url='http://10.10.0.20:8081/repository/pypi-proxy/simple'
+global.trusted-host='10.10.0.20'
+aleksei@vm10:~$
+
+```
+
 Download packege from Nexus (vm20)
 
 ```
