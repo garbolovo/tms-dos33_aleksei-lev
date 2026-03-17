@@ -23,7 +23,13 @@ which docker
 sudo cat /etc/systemd/system/js-app.service
 
 ```
+LOGS:
 
+
+```
+journalctl -u js-app -n 50 --no-pager
+
+```
 
 
 Ex:
