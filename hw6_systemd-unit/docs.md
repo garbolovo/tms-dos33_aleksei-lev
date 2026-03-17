@@ -17,6 +17,15 @@ which node
 which docker
 ```
 
+## Service File
+
+```
+sudo cat /etc/systemd/system/js-app.service
+
+```
+
+
+
 Ex:
 ```
 aleksei@vm20:/etc/systemd/system$ which node
