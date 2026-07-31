@@ -1,17 +1,24 @@
 [Unit]
 Description=JS DevOps App
 After=network.target
+StartLimitIntervalSec=60
+StartLimitBurst=5
 
 [Service]
 Type=simple
 User=nodeuser
 WorkingDirectory=/opt/js-app
 ExecStart=/usr/bin/node /opt/js-app/app.js
-Restart=always
+Restart=on-failure
 RestartSec=5
 Nice=5
 StandardOutput=journal
 StandardError=journal
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectHome=true
+ProtectSystem=strict
+ReadWritePaths=/var/log/js-app
 
 [Install]
 WantedBy=multi-user.target
