@@ -4,5 +4,9 @@ const fs = require('fs');
 
 setInterval(() => {
   const log = `${new Date().toISOString()} | PID=${process.pid}\n`;
-  fs.appendFileSync('/var/log/js-app/app.log', log);
+  try {
+    fs.appendFileSync('/var/log/js-app/app.log', log);
+  } catch (err) {
+    console.error('log write failed:', err.message);
+  }
 }, 5000);
